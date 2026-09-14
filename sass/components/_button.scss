@@ -1,0 +1,36 @@
+.btn {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 0;
+    border-radius: 2px;
+    text-transform: uppercase;
+    padding: 1.8rem 4.5rem;
+    font-size: 2rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.btn-accent {
+  color: $c-white;
+  background-color: $c-accent;
+  border-color: $c-accent;
+}
+.btn-accent:hover {
+    color: $c-accent;
+    background-color: $c-thm-light;
+    border-color: $c-thm-light;
+}
+
+.btn-mid {
+  color: $c-white;
+  background-color: $c-thm-mid;
+  border-color: $c-thm-mid;
+}
+.btn-mid:hover {
+    color: $c-primary;
+    background-color: $c-base;
+    border-color: $c-base;
+}

@@ -1,0 +1,49 @@
+.services {
+  &__menu {
+    &__cols {
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        @include media(md) {
+            justify-content: space-around;
+          }
+        @include media(sm) {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
+    }
+    &-element {
+      display: flex;
+      width: 23%;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 2rem 1rem 2rem 1rem;
+      flex-wrap: wrap;
+      @include media(md) {
+        width: 40%;
+      }
+      @include media(sm) {
+        width: 100%;
+      }
+    }
+    &-icon {
+      width: 100%;
+      max-width: 8rem;
+      max-height: 8rem;
+      fill: $c-thm-light;
+    }
+    &-text {
+      margin-top: 2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      word-wrap: break-word;
+    }
+    &-anchor {
+        margin-top: 5rem;
+        scroll-margin-top: 5rem;
+      }
+  }
+}

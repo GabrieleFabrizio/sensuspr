@@ -1,0 +1,76 @@
+services:
+  sensuspr-db:
+    image: mysql:8.0
+    container_name: sensuspr-db
+    restart: no
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db_dump.sql:/docker-entrypoint-initdb.d/db_dump.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - traefik-net
+
+  php:
+    build: .
+    container_name: sensuspr-php
+    restart: no
+    depends_on:
+      sensuspr-db:
+        condition: service_healthy
+    env_file:
+      - .env
+    volumes:
+      - .:/var/www/html
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sensuspr.rule=Host(`sensuspr.localhost`)"
+      - "traefik.http.routers.sensuspr.entrypoints=web"
+      - "traefik.http.services.sensuspr.loadbalancer.server.port=80"
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: sensuspr-mailpit
+    restart: no
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sensuspr-mailpit.rule=Host(`sensuspr-mailpit.localhost`)"
+      - "traefik.http.routers.sensuspr-mailpit.entrypoints=web"
+      - "traefik.http.services.sensuspr-mailpit.loadbalancer.server.port=8025"
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: sensuspr-pma
+    restart: no
+    depends_on:
+      - sensuspr-db
+    environment:
+      PMA_HOST: sensuspr-db
+      PMA_USER: root
+      PMA_PASSWORD: ${DB_ROOT_PASSWORD}
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sensuspr-pma.rule=Host(`sensuspr-pma.localhost`)"
+      - "traefik.http.routers.sensuspr-pma.entrypoints=web"
+      - "traefik.http.services.sensuspr-pma.loadbalancer.server.port=80"
+
+volumes:
+  db_data:
+
+networks:
+  traefik-net:
+    external: true

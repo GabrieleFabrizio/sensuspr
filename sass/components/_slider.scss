@@ -1,0 +1,163 @@
+#slider {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  & ul {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 20rem;
+    list-style: none;
+  }
+  & ul li {
+    position: relative;
+    display: block;
+    float: left;
+    margin: 0;
+    padding: 0;
+    max-width: 100rem;
+    width: 100%;
+    height: 55rem;
+    text-align: center;
+    line-height: 60rem;
+  }
+  @include media(md) {
+    & ul li {
+      max-width: 70rem;
+      height: 60rem;
+    }
+  }
+  @include media(sm) {
+    & ul li {
+      max-width: 50rem;
+    }
+  }
+  @include media(xs) {
+    & ul li {
+      max-width: 40rem;
+    }
+  }
+}
+
+.slider {
+  &__control_prev,
+  &__control_next {
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5rem;
+    top: 40%;
+    z-index: 999;
+    padding: 2rem 2.5rem;
+    width: auto;
+    height: auto;
+    background: $c-base-light;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  &__control_prev,
+  &__control_next {
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 5rem;
+    top: 40%;
+    z-index: 999;
+    padding: 2rem 2.5rem;
+    width: auto;
+    height: auto;
+    background: $c-base-light;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  &__control_prev:hover,
+  &__control_next:hover {
+    background-color: $c-base;
+    transition: all 0.2s ease;
+  }
+
+  &__control_prev {
+    border-radius: 50rem;
+  }
+
+  &__control_next {
+    right: 0;
+    border-radius: 50rem;
+  }
+
+  &__slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 70rem;
+    margin: 0 auto;
+    &__text {
+      font-size: 1.7rem;
+      margin-bottom: 3rem;
+      text-align: justify;
+      max-height: 28rem;
+      overflow: hidden;
+    }
+    &__img {
+      width: 13rem;
+      height: 13rem;
+      border-radius: 10rem;
+      margin-bottom: 3rem;
+    }
+    &__name {
+      padding: 0.5rem;
+      padding-bottom: 0rem;
+      margin: 0;
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+    &__role {
+      padding-bottom: 0.5rem;
+      padding-top: 0;
+      margin: 0;
+      font-weight: 100;
+      font-size: 1.4rem;
+    }
+    &__company {
+      padding: 0.5rem;
+      margin: 0;
+      font-weight: 100;
+      font-size: 1.8rem;
+      font-family: "Goudy Old Style", Arial, sans-serif;
+      text-transform: uppercase;
+    }
+  }
+  // for the mid window
+  @include media(md) {
+    &__slide {
+      max-width: 50rem;
+    }
+  }
+  @include media(sm) {
+    &__slide {
+      max-width: 50rem;
+      &__text {
+        max-height: 70rem;
+      }
+    }
+    &__control_prev {
+      display: none;
+    }
+    &__control_next {
+      display: none;
+    }
+  }
+  @include media(xs) {
+    &__slide {
+      max-width: 30rem;
+    }
+  }
+}

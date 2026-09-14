@@ -1,0 +1,43 @@
+
+RewriteEngine  on
+
+# start with rules
+
+#This blocks the direct access to the pfolder pages and sends to forbidden access
+RewriteRule ^pages/home/?$ ./403/index.shtml [L]
+
+RewriteBase /
+
+# Redirect www to non-www with HTTPS (production domain only, skip local dev hosts)
+RewriteCond %{HTTP_HOST} ^(www\.)?sensuspr\.com$ [NC]
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.sensuspr\.com$ [NC]
+RewriteRule ^(.*)$ https://sensuspr.com/$1 [R=301,L]
+
+RewriteRule ^sitemap.xml                                        ./sitemap.php
+
+RewriteRule ^home                                               ./index.php?page=home
+RewriteRule ^about                                              ./index.php?page=about
+RewriteRule ^contacts                                           ./index.php?page=contacts
+RewriteRule ^services                                           ./index.php?page=services
+RewriteRule ^mission                                            ./index.php?page=mission
+RewriteRule ^insights/([0-9]+)/(.*)$                            ./index.php?page=insights&step=singleBlogShare&idBlog=$1&pagetype=blog [NC,L]
+RewriteRule ^insights/category/(.*)$                            ./index.php?page=insights&step=category&category=$1 [NC,L]
+RewriteRule ^insights                                           ./index.php?page=insights
+RewriteRule ^casestudies                                        ./index.php?page=casestudies
+RewriteRule ^terms-conditions                                   ./index.php?page=terms-conditions
+RewriteRule ^privacy-policy                                     ./index.php?page=privacy-policy
+RewriteRule ^disclaimer                                         ./index.php?page=disclaimer
+RewriteRule ^comment-policy                                     ./index.php?page=comment-policy
+RewriteRule ^cookie-policy                                      ./index.php?page=cookie-policy
+RewriteRule ^landing                                            ./index.php?page=landing
+
+RewriteRule ^news/([0-9]+)/imgs/blog/(.*)                       ./img/blog/$2 [L]
+RewriteRule ^news/([0-9]+)/(.*)$                                ./index.php?page=new&step=singleBlogShare&idBlog=$1&pagetype=blog [NC,L]
+RewriteRule ^news                                               ./index.php?page=news
+
+RewriteRule ^login                                              ./index.php?page=login
+RewriteRule ^join                                               ./index.php?page=login&step=join
+
+RewriteRule ^admin                                              ./index.php?page=admin
+RewriteRule ^unauthorized                                       ./index.php?page=unauthorized

@@ -1,0 +1,36 @@
+.about {
+    &__f-oldstyle {
+        font-family: "Goudy Old Style",Verdana,Arial,sans-serif !important;
+    }
+    &__cols {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        @include media(sm) {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        &__elem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 48%;
+            @include media(sm) {
+                width: 100%;
+            }
+            &__img {
+                width: 100%;
+                height: auto;
+                max-width: 30rem;
+            }
+        }
+        &__elem-inv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            @include media(sm) {
+                flex-direction: column-reverse;
+            }
+        }
+    }
+}

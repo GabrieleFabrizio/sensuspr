@@ -1,0 +1,32 @@
+.contacts{
+    &__how {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        &-2 {
+            display: flex;
+            flex-direction: row;
+            &__social {
+                height: 2.5rem;
+                width: 2.5rem;
+                fill: $c-white;
+            }
+            &__socialcont {
+                width: 5rem;
+                height: 5rem;
+                background-color: $c-thm-light;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-right: 2rem;
+            }
+            &__socialcont:hover {
+                background-color: $c-thm-mid;
+            }
+        }
+    }
+    &__requestanswer {
+        display: none;
+    }
+}

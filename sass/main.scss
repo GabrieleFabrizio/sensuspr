@@ -1,0 +1,28 @@
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+@import "base/typography";
+@import "base/base";
+@import "base/animations";
+@import "base/utilities";
+
+@import "components/button";
+@import "components/slider";
+@import "components/paginator";
+@import "components/form";
+@import "components/lightgallery";
+@import "components/addimg";
+
+@import "layout/header";
+@import "layout/footer";
+
+@import "components/tables";
+
+@import "pages/login";
+@import "pages/admin";
+@import "pages/insights";
+@import "pages/services";
+@import "pages/about";
+@import "pages/contacts";
+@import "pages/home";

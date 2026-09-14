@@ -1,0 +1,157 @@
+/* Footer css */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  &__top {
+    background-color: $c-accent;
+    color: $c-white;
+    font-weight: 600;
+    padding: 3.5rem 0 3.5rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    &__contact {
+      margin-top: 1.6rem;
+      color: $c-white;
+      display: inline-block;
+      padding: 1.2rem 2rem;
+      background-color: transparent;
+      border: 1px solid $c-white;
+      border-radius: 4px;
+      font-size: 2rem;
+      cursor: pointer;
+      &:hover {
+        background-color: $c-thm-light;
+      }
+    }
+    @include media(sm) {
+      &__contact {
+        font-size: 1.6rem;
+      }
+    }
+  }
+  &__bottom {
+    background-color: $c-thm-light;
+    min-height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem 4rem 1.6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    @include media(sm) {
+      padding: 2.5rem 1rem 1.6rem 1rem;
+    }
+    &__container {
+      margin: 0 auto;
+      width: 100rem;
+      border-bottom: 1px solid $c-white;
+      padding: 2rem;
+      @include media(sm) {
+        padding: 2rem 1rem 2rem 1rem;
+      }
+    }
+    &__col-left {
+      font-size: 1.7rem;
+      font-weight: 100;
+      color: $c-white;
+      display: flex;
+      flex-direction: column;
+      & a {
+        color: $c-white;
+        font-size: 1.7rem;
+        font-weight: 100;
+        margin-bottom: 1rem;
+      }
+    }
+    &__col-center {
+      font-size: 1.5rem;
+      font-weight: 100;
+      color: $c-white;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      &-text {
+        font-size: 1.5rem;
+        text-align: justify;
+        margin: 0;
+        margin-bottom: 2.5rem;
+      }
+      &-input {
+        font-size: 1.4rem;
+        padding: 0.8rem;
+        border: 0;
+      }
+      &-newsbutton {
+        margin-top: 2rem;
+        width: 9rem;
+        margin-right: 0;
+        text-align: center;
+        color: $c-white;
+        padding: 0.5rem 1.6rem;
+        background-color: transparent;
+        border: 1px solid $c-white;
+        border-radius: 4px;
+        font-size: 1.4rem;
+        cursor: pointer;
+        &:hover {
+          background-color: $c-thm-mid;
+        }
+      }
+    }
+    &__col-right {
+      font-size: 1.8rem;
+      font-weight: 100;
+      color: $c-white;
+      fill: $c-white;
+      text-align: right;
+      &-social {
+        fill: $c-white;
+        height: 2.5rem;
+        width: 2.5rem;
+        margin-right: 1rem;
+      }
+    }
+    &__cr {
+      text-align: center;
+      &-text {
+        color: $c-white;
+        text-align: center;
+        font-size: 1.5rem;
+      }
+      &-logo {
+        fill: $c-thm-dark;
+        width: 95%;
+        max-width: 30rem;
+        max-height: 5rem;
+      }
+    }
+    @include media(md) {
+      &__container {
+        width: 100%;
+      }
+    }
+    @include media(sm) {
+      &__col-left {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+      &__col-center {
+        align-items: center;
+        margin-bottom: 3rem;
+        &-input {
+          width: 95%;
+          max-width: 25rem;
+        }
+      }
+      &__col-right {
+        text-align: center;
+        &-social {
+          margin: 1rem;
+        }
+      }
+    }
+  }
+}

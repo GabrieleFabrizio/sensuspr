@@ -1,0 +1,32 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.6rem;
+    margin-top:3rem;
+    border-radius: 0.7rem;
+    overflow: hidden;
+    margin-bottom:1rem;
+    background-color: var(--color-lightprim);
+    & td, & th {
+        border: 1px solid #ddd;
+        padding: 0.6rem;
+    }
+    & tr {
+        vertical-align: top;
+    }
+    & tr:nth-child(even){
+        background-color: var(--color-white);
+    }
+    &--green th {
+        background-color: var(--color-cat-reviews);
+        color: var(--color-white);
+    }
+    &--red th {
+        background-color: var(--color-cat-safety);
+        color: var(--color-white);
+    }
+    &--primary th {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+    }
+}

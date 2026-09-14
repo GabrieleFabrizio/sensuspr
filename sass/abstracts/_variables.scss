@@ -1,0 +1,26 @@
+/* sass variables
+@import '../../styles/common.scss';
+*/
+
+$c-primary: #252525;
+$c-background: #ffffff;
+$c-white: #ffffff;
+$c-accent: #d1aeac;
+$c-base:#a49fa5;
+$c-base-light: #eeeeee;
+$c-thm-light:#4a989a;
+$c-thm-mid:#007d83;
+$c-thm-dark:#245d68;
+
+// using instead css variables on root so they are available throughout all the document
+
+:root {
+    --color-primary: $c-primary;
+    --color-backgroud: $c-backgroud;
+    --color-accent: $c-accent;
+    --color-base: $c-base;
+    --color-base-light: $c-base-light;
+    --color-thm-light: $c-thm-light;
+    --color-thm-mid: $c-thm-mid;
+    --color-thm-dark: $c-thm-dark;
+}

@@ -1,0 +1,42 @@
+.login {
+    &__container {
+        max-width: 80rem;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 5rem;
+        color: var(--color-primary);
+        &__title {
+            margin-top: 3rem;
+            font-size: 3rem;
+            color: $c-thm-mid;
+        }
+        &__form {
+            max-width: 40rem;
+            margin: 0 auto;
+            margin-top: 4rem;
+            font-size: 2rem;
+            &__element {
+                margin-bottom: 2rem;
+                margin-top:1rem;
+                border: 1px solid $c-primary;
+                border-radius: 4px;
+                color: $c-thm-light;
+                font-weight: 600;
+            }
+            &__btn {
+                min-width: 12rem;
+                text-align: center;
+                font-size: 1.8rem;
+                padding: 1.3rem 2rem;
+                text-transform: none;
+                line-height: 1; 
+                margin-top: 4rem;
+                @include media (sm) {
+                    font-size: 1.4rem;
+                    padding: 1rem 0.5rem
+                }
+            }
+        }
+    }
+ 
+}

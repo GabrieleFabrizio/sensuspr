@@ -1,0 +1,9 @@
+Options -Indexes
+Order deny,allow
+Deny from all
+<FilesMatch "\.(webp|jpg|jpeg|png|gif|mp4)$">
+    Order deny,allow
+    Allow from all
+</FilesMatch>
+
+# ErrorDocument 403 /restricted.php

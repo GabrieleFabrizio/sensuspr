@@ -1,0 +1,41 @@
+
+// Media query manager
+/*
+Media query steps
+0-600px :       xs - Phone
+600-900px :     sm - Tablet portrait
+900-1200px :    md - Tablet landscape
+1200-1800px :   lg - Normal layout
+1800px + :      xl - Large desktop
+
+Created media query mixins and the use in any place will be much more
+@include media([step(xs,sm...)]) { [css for the media query] }
+*/
+
+@mixin media($breakpoint) {
+    @if $breakpoint == xxs {
+        @media (max-width:400px) {@content};
+    }
+    @if $breakpoint == xs {
+        @media (max-width:600px) {@content};
+    }
+    @if $breakpoint == sm {
+        @media (max-width:900px) {@content};
+    }
+    @if $breakpoint == ssm {
+        @media (max-width:1000px) {@content};
+    }
+    @if $breakpoint == md {
+        @media (max-width:1200px) {@content};
+    }
+    @if $breakpoint == smd {
+        @media (max-width:1400px) {@content};
+    }
+    @if $breakpoint == lg {
+        @media (max-width:1800px) {@content};
+    }
+    @if $breakpoint == xl {
+        @media (min-width:1800px) {@content};
+    }
+    
+}
