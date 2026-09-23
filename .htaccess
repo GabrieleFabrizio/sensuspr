@@ -9,8 +9,11 @@ RewriteRule ^pages/home/?$ ./403/index.shtml [L]
 RewriteBase /
 
 # Redirect www to non-www with HTTPS (production domain only, skip local dev hosts)
+# Uses X-Forwarded-Proto, not %{HTTPS}, since Traefik terminates TLS and
+# forwards to Apache over plain HTTP — mod_rewrite's %{HTTPS} only reflects
+# an actual mod_ssl connection, which never happens here.
 RewriteCond %{HTTP_HOST} ^(www\.)?sensuspr\.com$ [NC]
-RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https [OR]
 RewriteCond %{HTTP_HOST} ^www\.sensuspr\.com$ [NC]
 RewriteRule ^(.*)$ https://sensuspr.com/$1 [R=301,L]
 
