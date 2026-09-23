@@ -31,6 +31,9 @@ set -e
     fi
 } > /etc/msmtprc
 
-chmod 600 /etc/msmtprc
+# Apache workers run as www-data, not root, so root-only 600 left msmtp
+# unable to read its own config when PHP's mail() shelled out to it.
+chown root:www-data /etc/msmtprc
+chmod 640 /etc/msmtprc
 
 exec "$@"
