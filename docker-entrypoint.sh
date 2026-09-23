@@ -10,6 +10,10 @@ set -e
     echo "host ${SMTP_HOST:-mailpit}"
     echo "port ${SMTP_PORT:-1025}"
     echo "from ${SEND_EMAIL:-noreply@sensuspr.com}"
+    # EHLO/HELO identity. Defaults to "localhost", which some relays
+    # (Google's included) treat as a red flag for abuse. Use the sending
+    # domain instead.
+    echo "domain $(echo "${SEND_EMAIL:-noreply@sensuspr.com}" | cut -d'@' -f2)"
 
     if [ "${SMTP_TLS:-off}" = "on" ]; then
         echo "tls on"
