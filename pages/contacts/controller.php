@@ -84,12 +84,15 @@ if (preg_match("/controller.php/",$_SERVER['PHP_SELF'])) {
             break;
         }
 
-        global $sendEmail;
+        global $sendEmail, $sendName;
         $timeDate = date("Y-m-d H:i", time() + 7200) . " GMT +2h";
 
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-        $headers .= 'From: ' . $name . ' <' . $email . '>' . "\r\n";
+        // From must stay on our own domain (SMTP relay only accepts our
+        // domain as envelope sender); the visitor's address goes in Reply-To.
+        $headers .= 'From: ' . $sendName . ' <' . $sendEmail . '>' . "\r\n";
+        $headers .= 'Reply-To: ' . $name . ' <' . $email . '>' . "\r\n";
 
         $subject   = 'Sensuspr WebForm request from ' . $name;
         $emailText = "<h1><font color=\"#2f65af\">Sensus PR Website</font></h1>"
