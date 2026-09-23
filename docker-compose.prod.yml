@@ -42,11 +42,18 @@ services:
       - traefik-net
     labels:
       - "traefik.enable=true"
+      # HTTPS router
       - "traefik.http.routers.sensuspr.rule=Host(`sensuspr.com`) || Host(`www.sensuspr.com`)"
       - "traefik.http.routers.sensuspr.entrypoints=websecure"
       - "traefik.http.routers.sensuspr.tls=true"
       - "traefik.http.routers.sensuspr.tls.certresolver=letsencrypt"
       - "traefik.http.services.sensuspr.loadbalancer.server.port=80"
+      # HTTP router: redirect to HTTPS instead of serving plaintext
+      - "traefik.http.routers.sensuspr-http.rule=Host(`sensuspr.com`) || Host(`www.sensuspr.com`)"
+      - "traefik.http.routers.sensuspr-http.entrypoints=web"
+      - "traefik.http.routers.sensuspr-http.middlewares=sensuspr-https-redirect"
+      - "traefik.http.middlewares.sensuspr-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.sensuspr-https-redirect.redirectscheme.permanent=true"
 
 volumes:
   db_data:
