@@ -1,0 +1,57 @@
+services:
+  sensuspr-db:
+    image: mysql:8.0
+    container_name: sensuspr-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      # Only used to seed an EMPTY volume on first boot. Put the real
+      # production dump here before the first `up`, or import manually
+      # afterwards (see runbook).
+      - ./db_dump.sql:/docker-entrypoint-initdb.d/db_dump.sql
+    # Loopback-only: reachable via `ssh -L 3306:127.0.0.1:3306 ...` for a
+    # local GUI client, never exposed to the internet. No phpMyAdmin in prod.
+    ports:
+      - "127.0.0.1:3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - traefik-net
+
+  php:
+    build: .
+    container_name: sensuspr-php
+    restart: unless-stopped
+    depends_on:
+      sensuspr-db:
+        condition: service_healthy
+    env_file:
+      - .env.production
+    volumes:
+      - .:/var/www/html
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sensuspr.rule=Host(`sensuspr.com`) || Host(`www.sensuspr.com`)"
+      - "traefik.http.routers.sensuspr.entrypoints=websecure"
+      - "traefik.http.routers.sensuspr.tls=true"
+      # CHECK ME: match the certresolver name used by other services on this
+      # server (e.g. kitesurfculture.com's labels) before deploying.
+      - "traefik.http.routers.sensuspr.tls.certresolver=letsencrypt"
+      - "traefik.http.services.sensuspr.loadbalancer.server.port=80"
+
+volumes:
+  db_data:
+
+networks:
+  traefik-net:
+    external: true

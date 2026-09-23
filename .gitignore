@@ -1,5 +1,7 @@
 .env
+.env.production
 db_dump.sql
+db_dump_prod.sql
 .DS_Store
 node_modules/
 *.log
