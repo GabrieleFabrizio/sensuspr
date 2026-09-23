@@ -14,10 +14,11 @@ services:
       # production dump here before the first `up`, or import manually
       # afterwards (see runbook).
       - ./db_dump.sql:/docker-entrypoint-initdb.d/db_dump.sql
-    # Loopback-only: reachable via `ssh -L 3306:127.0.0.1:3306 ...` for a
+    # Loopback-only: reachable via `ssh -L 3307:127.0.0.1:3307 ...` for a
     # local GUI client, never exposed to the internet. No phpMyAdmin in prod.
+    # Host port 3307 (not 3306) since other sites on this box already use 3306.
     ports:
-      - "127.0.0.1:3306:3306"
+      - "127.0.0.1:3307:3306"
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -44,8 +45,6 @@ services:
       - "traefik.http.routers.sensuspr.rule=Host(`sensuspr.com`) || Host(`www.sensuspr.com`)"
       - "traefik.http.routers.sensuspr.entrypoints=websecure"
       - "traefik.http.routers.sensuspr.tls=true"
-      # CHECK ME: match the certresolver name used by other services on this
-      # server (e.g. kitesurfculture.com's labels) before deploying.
       - "traefik.http.routers.sensuspr.tls.certresolver=letsencrypt"
       - "traefik.http.services.sensuspr.loadbalancer.server.port=80"
 
