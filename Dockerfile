@@ -1,5 +1,10 @@
 FROM php:8.3-apache
 
+# Align www-data's uid/gid with the host user that owns the bind-mounted
+# project files (docker-compose.yml mounts ".:/var/www/html"), otherwise
+# Apache can read but not write/overwrite files such as img/blog uploads.
+RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
+
 RUN docker-php-ext-install mysqli && \
     docker-php-ext-enable mysqli && \
     a2enmod rewrite
